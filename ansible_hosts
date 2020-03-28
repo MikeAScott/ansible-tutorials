@@ -1,3 +1,8 @@
-web ansible_host=192.168.35.101 ansible_connection=ssh
+[web]
+web1
 
-
+[web:vars]
+ansible_connection=ssh
+ansible_port=22
+ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key
+ansible_user=vagrant
