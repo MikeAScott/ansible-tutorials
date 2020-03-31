@@ -4,7 +4,6 @@ VAGRANT_API_VERSION = "2"
 CONTROL_IP = "192.168.35.10"
 WEB1_IP = "192.168.35.20"
 
-
 Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   config.vm.define "web1" do |web1|
@@ -16,7 +15,6 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     web1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--memory", 256]
-      v.customize ["modifyvm", :id, "--name", "web1"]
     end
 
     web1.vm.provision "shell", inline: <<-SCRIPT
@@ -39,6 +37,9 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     control.vm.provision "shell", inline: <<-SCRIPT
       echo "#{WEB1_IP} web1" >> /etc/hosts
       ssh-keyscan -H web1 >> /home/vagrant/.ssh/known_hosts
+    SCRIPT
+    control.vm.provision "shell", inline: <<-SCRIPT
+      runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-server.yml'
     SCRIPT
   end
 
