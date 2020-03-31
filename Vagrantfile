@@ -58,7 +58,8 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
       ssh-keyscan -H db1 >> /home/vagrant/.ssh/known_hosts
     SCRIPT
     control.vm.provision "shell", inline: <<-SCRIPT
-      runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-stack.yml'
+      cd /vagrant/playbooks
+      runuser -l vagrant -c 'ansible-playbook web-stack.yml'
     SCRIPT
   end
 
