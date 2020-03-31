@@ -1,8 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 VAGRANT_API_VERSION = "2"
+
 CONTROL_IP = "192.168.35.10"
-WEB1_IP = "192.168.35.20"
+WEB1_IP    = "192.168.35.20"
+DB1_IP     = "192.168.35.20"
 
 Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
@@ -22,6 +24,21 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     SCRIPT
   end
 
+  config.vm.define "db1" do |db1|
+    db1.vm.box = "centos/7"
+    db1.vm.hostname = 'db1'
+    db1.vm.network :private_network, ip: DB1_IP
+
+    db1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+    end
+
+    db1.vm.provision "shell", inline: <<-SCRIPT
+      cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
+    SCRIPT
+  end
+
   config.vm.define "control" do |control|
     control.vm.box = "ubuntu/bionic64"
     control.vm.hostname = 'control'
@@ -37,9 +54,11 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     control.vm.provision "shell", inline: <<-SCRIPT
       echo "#{WEB1_IP} web1" >> /etc/hosts
       ssh-keyscan -H web1 >> /home/vagrant/.ssh/known_hosts
+      echo "#{DB1_IP} db1" >> /etc/hosts
+      ssh-keyscan -H db1 >> /home/vagrant/.ssh/known_hosts
     SCRIPT
     control.vm.provision "shell", inline: <<-SCRIPT
-      runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-server.yml'
+      runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-stack.yml'
     SCRIPT
   end
 
