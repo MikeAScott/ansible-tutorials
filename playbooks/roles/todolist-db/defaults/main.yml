@@ -1,0 +1,5 @@
+---
+# defaults file for todolist-db
+db_name: tododb
+db_user: todo
+db_password: todo

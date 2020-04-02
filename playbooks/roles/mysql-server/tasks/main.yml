@@ -1,15 +1,20 @@
 ---
 # tasks file for mysql-server
-- name: Ensure MySql Community repo is available
-  yum: 
-    name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-    state: latest
-    update_cache: yes
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include: CentOS.yml
+  when: ansible_distribution == "CentOS"
+
 - name: Ensure mySQL is installed
-  yum:
+  package:
     name: mysql-server
     state: latest
+    update_cache: yes
+  become: true
+
 - name: Ensure mySQL service is running
   service:
-    name: mysqld
+    name: "{{ mysql_service }}"
     state: started
+  become: true

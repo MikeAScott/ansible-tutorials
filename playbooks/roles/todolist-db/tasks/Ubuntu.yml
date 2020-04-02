@@ -1,0 +1,19 @@
+---
+- name: Ensure mysql_config is installed
+  package:
+    name: libmysqlclient-dev
+    state: present
+  become: true
+
+- name: Ensure pip3 is installed
+  package:
+    name: python3-pip
+    state: present
+  become: true
+
+- name: Ensure mysqlclient module is installed
+  pip:
+    name: mysqlclient
+    state: present
+    executable: pip3
+  become: true

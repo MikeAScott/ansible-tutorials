@@ -5,10 +5,24 @@
 
   roles:
     - role: tomcat-server
+  
+  tasks:
+    - name: Copy War to tomcat
+      copy:
+        src: /vagrant/dist/TodoDemo-0.0.1-SNAPSHOT.war
+        dest: /var/lib/tomcat/webapps/todo.war
+    - name: Ensure tomcat is configured
+      copy:
+        src: /vagrant/dist/application.properties
+        dest: /var/lib/tomcat/webapps/todo/WEB-INF/classes/application.properties
+        owner: tomcat
+        group: tomcat
+        
 
 - name: Configure DB Server
   hosts: db
-  become: true
+  # become: true
   roles:
-    - role: mysql-server
-
+    # - role: python3
+    # - role: mysql-server
+    - role: todolist-db

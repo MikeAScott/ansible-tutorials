@@ -1,0 +1,22 @@
+---
+- name: Ensure epel repo is installed
+  yum:
+    name: epel-release
+    update_cache: yes
+  become: true
+  
+- name: Ensure mysqlclient dependencies are installed
+  yum: 
+    name:
+      - mysql-community-devel
+      - MySQL-python
+      - python-devel
+      - python-pip
+      - gcc
+  become: true
+
+- name: Ensure mysqlclient module is installed
+  pip:
+    name: mysqlclient
+    state: present
+  become: true

@@ -3,10 +3,17 @@ web1
 
 [db]
 db1
+db2
 
 [stack:children]
 web
 db
+
+[py3-hosts]
+db2
+
+[py3-hosts:vars]
+ansible_python_interpreter=/usr/bin/python3
 
 [stack:vars]
 ansible_connection=ssh
