@@ -1,6 +1,6 @@
 galaxy_info:
   author: Mike Scott
-  description: Ensures mySQL server is installed on Centos 7
+  description: Ensures mySQL server is installed on Centos 7 and Ubuntu
   company: NTT Data
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -24,6 +24,9 @@ galaxy_info:
     - name: Centos
       versions:
       - 7
+    - name: Ubnuntu
+      versions:
+      - bionic
 
   galaxy_tags:
     - mysql

@@ -8,7 +8,7 @@
 - name: Ensure todolist db is present
   mysql_db:
     name: "{{ db_name }}"
-    state: present
+    state: absent
   become: true
 
 - name: Ensure todo user is present

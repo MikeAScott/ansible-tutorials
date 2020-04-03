@@ -1,28 +1,40 @@
 ---
+- name: Gather facts
+  hosts: all
+  gather_facts: true
+
 - name: Configure Web Server
   hosts: web
   become: true
 
+  # vars:
+  #   db1_ip: "{{ hostvars['db1']['ansible_eth1']['ipv4']['address'] }}"
+
   roles:
     - role: tomcat-server
-  
-  tasks:
-    - name: Copy War to tomcat
-      copy:
-        src: /vagrant/dist/TodoDemo-0.0.1-SNAPSHOT.war
-        dest: /var/lib/tomcat/webapps/todo.war
-    - name: Ensure tomcat is configured
-      copy:
-        src: /vagrant/dist/application.properties
-        dest: /var/lib/tomcat/webapps/todo/WEB-INF/classes/application.properties
-        owner: tomcat
-        group: tomcat
-        
 
+  tasks:
+    # - name: Test hosts list
+    #   debug:
+    #     msg: "DB1 IP = {{ db1_ip }}"
+
+    # - name: Copy War to tomcat
+    #   copy:
+    #     src: /vagrant/dist/TodoDemo-0.0.1-SNAPSHOT.war
+    #     dest: /var/lib/tomcat/webapps/todo.war
+    # - name: Ensure tomcat is configured
+    #   copy:
+    #     src: /vagrant/dist/application.properties
+    #     dest: /var/lib/tomcat/webapps/todo/WEB-INF/classes/application.properties
+    #     owner: tomcat
+    #     group: tomcat
+        
 - name: Configure DB Server
   hosts: db
   # become: true
+  vars:
+    db_name: tododb
+    db_user: todo
   roles:
-    # - role: python3
-    # - role: mysql-server
+    - role: mysql-server
     - role: todolist-db
