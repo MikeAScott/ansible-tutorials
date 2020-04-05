@@ -1,0 +1,6 @@
+- name: Ensure MySql Community repo is available
+  yum: 
+    name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    state: latest
+    update_cache: yes
+  become: true

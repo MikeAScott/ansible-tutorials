@@ -1,0 +1,24 @@
+---
+# tasks file for todo-webapp
+- name: Copy War to tomcat
+  copy:
+    src: "/vagrant/dist/{{ app_package }}-{{ app_version }}.war"
+    dest:  /var/lib/tomcat9/webapps/todo.war
+  notify:
+    - restart tomcat
+
+- name: Ensure war is deployed
+  wait_for:
+    path:  "/var/lib/tomcat9/webapps/todo/WEB-INF"
+    delay: 10
+    timeout: 30
+    state: present
+    msg: "Specified todo app did not deploy"
+
+
+- name: ensure application.properties is configured
+  template: 
+    src: templates/application.properties.j2
+    dest: /var/lib/tomcat9/webapps/todo/WEB-INF/classes/application.properties
+  notify:
+    - restart tomcat

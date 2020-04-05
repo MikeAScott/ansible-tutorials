@@ -4,20 +4,21 @@ VAGRANT_API_VERSION = "2"
 
 CONTROL_IP = "192.168.35.10"
 WEB1_IP    = "192.168.35.20"
-DB1_IP     = "192.168.35.20"
+DB1_IP     = "192.168.35.30"
 
 Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   config.vm.define "web1" do |web1|
-    web1.vm.box = "centos/7"
+    web1.vm.box = "ubuntu/bionic64"
     web1.vm.hostname = 'web1'
     web1.vm.network :private_network, ip: WEB1_IP
     web1.vm.network "forwarded_port",id: "tomcat", guest: 8080, host: 8080
 
     web1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--memory", 512]
     end
+    web1.vm.synced_folder ".", "/vagrant",  :mount_options => ["dmode=750,fmode=750"]
 
     web1.vm.provision "shell", inline: <<-SCRIPT
       cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
@@ -50,6 +51,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
       v.customize ["modifyvm", :id, "--name", "control"]
     end
 
+    control.vm.synced_folder ".", "/vagrant",  :mount_options => ["dmode=750,fmode=750"]
     control.vm.provision "shell", path: "scripts/install_ansible.sh"
     control.vm.provision "shell", inline: <<-SCRIPT
       echo "#{WEB1_IP} web1" >> /etc/hosts
@@ -58,7 +60,7 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
       ssh-keyscan -H db1 >> /home/vagrant/.ssh/known_hosts
     SCRIPT
     control.vm.provision "shell", inline: <<-SCRIPT
-      runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-stack.yml'
+      runuser -l vagrant -c 'cd /vagrant/playbooks && ansible-playbook web-stack.yml'
     SCRIPT
   end
 end
