@@ -3,6 +3,16 @@
   hosts: all
   gather_facts: true
 
+- name: Configure DB Server
+  hosts: db
+  # become: true
+  roles:
+    - role: mysql-server
+    - role: todolist-db
+      vars:
+        db_user: todo
+        db_password: todo
+
 - name: Configure Web Server
   hosts: web
   become: true
@@ -18,19 +28,4 @@
         db_user: todo
         db_password: todo
 
-  tasks:
-    # - name: Test hosts list
-    #   debug:
-    #     msg: "DB1 IP = {{ db1_ip }}"
-
-
         
-- name: Configure DB Server
-  hosts: db
-  # become: true
-  roles:
-    - role: mysql-server
-    - role: todolist-db
-      vars:
-        db_user: todo
-        db_password: todo
