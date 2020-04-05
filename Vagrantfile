@@ -61,6 +61,4 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
       runuser -l vagrant -c 'ansible-playbook /vagrant/playbooks/web-stack.yml'
     SCRIPT
   end
-
-end 
-
+end

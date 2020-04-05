@@ -1,0 +1,17 @@
+---
+- name: Configure Web Server
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Ensure Tomcat is installed
+      package:
+        name: 
+          - tomcat
+          - tomcat-webapps
+        state: latest
+        update_cache: yes
+    - name: Ensure Tomcat is running
+      service:
+        name: tomcat
+        state: started
