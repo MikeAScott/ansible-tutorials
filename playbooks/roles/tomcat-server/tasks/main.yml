@@ -3,12 +3,12 @@
 - name: Ensure Tomcat is installed
   package:
     name: 
-      - tomcat
-      - tomcat-webapps
+      - tomcat9
     state: latest
     update_cache: yes
+  become: true
 
 - name: Ensure Tomcat is running
   service:
-    name: tomcat
+    name: tomcat9
     state: started

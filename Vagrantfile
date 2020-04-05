@@ -10,15 +10,16 @@ DB2_IP     = "192.168.35.31"
 Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   config.vm.define "web1" do |web1|
-    web1.vm.box = "centos/7"
+    web1.vm.box = "ubuntu/bionic64"
     web1.vm.hostname = 'web1'
     web1.vm.network :private_network, ip: WEB1_IP
     web1.vm.network "forwarded_port",id: "tomcat", guest: 8080, host: 8080
 
     web1.vm.provider :virtualbox do |v|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 256]
+      v.customize ["modifyvm", :id, "--memory", 512]
     end
+    web1.vm.synced_folder ".", "/vagrant",  :mount_options => ["dmode=750,fmode=750"]
 
     web1.vm.provision "shell", inline: <<-SCRIPT
       cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
@@ -40,20 +41,20 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
     SCRIPT
   end
 
-  config.vm.define "db2" do |db2|
-    db2.vm.box = "ubuntu/bionic64"
-    db2.vm.hostname = 'db2'
-    db2.vm.network :private_network, ip: DB2_IP
+  # config.vm.define "db2" do |db2|
+  #   db2.vm.box = "ubuntu/bionic64"
+  #   db2.vm.hostname = 'db2'
+  #   db2.vm.network :private_network, ip: DB2_IP
 
-    db2.vm.provider :virtualbox do |v|
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--memory", 512]
-    end
+  #   db2.vm.provider :virtualbox do |v|
+  #     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  #     v.customize ["modifyvm", :id, "--memory", 512]
+  #   end
 
-    db2.vm.provision "shell", inline: <<-SCRIPT
-      cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
-    SCRIPT
-  end
+  #   db2.vm.provision "shell", inline: <<-SCRIPT
+  #     cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
+  #   SCRIPT
+  # end
 
 
   config.vm.define "control" do |control|
@@ -74,8 +75,8 @@ Vagrant.configure(VAGRANT_API_VERSION) do |config|
       ssh-keyscan -H web1 >> /home/vagrant/.ssh/known_hosts
       echo "#{DB1_IP} db1" >> /etc/hosts
       ssh-keyscan -H db1 >> /home/vagrant/.ssh/known_hosts
-      echo "#{DB2_IP} db1" >> /etc/hosts
-      ssh-keyscan -H db1 >> /home/vagrant/.ssh/known_hosts
+      # echo "#{DB2_IP} db2" >> /etc/hosts
+      # ssh-keyscan -H db2 >> /home/vagrant/.ssh/known_hosts
     SCRIPT
     control.vm.provision "shell", inline: <<-SCRIPT
       runuser -l vagrant -c 'cd /vagrant/playbooks && ansible-playbook web-stack.yml'

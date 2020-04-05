@@ -5,13 +5,13 @@
 - include: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
 
-- name: Ensure todolist db is present
+- name: Ensure {{ db_name }} db is present
   mysql_db:
     name: "{{ db_name }}"
-    state: absent
+    state: present
   become: true
 
-- name: Ensure todo user is present
+- name: Ensure {{ db_user }} user is present
   mysql_user:
     name: "{{ db_user }}"
     host: "%"

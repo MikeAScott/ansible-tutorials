@@ -3,3 +3,4 @@ keys/
 .vagrant
 .DS_Store
 *.retry
+dist/
