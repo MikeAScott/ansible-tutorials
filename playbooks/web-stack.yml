@@ -4,7 +4,7 @@
   gather_facts: true
 
 - name: Configure DB Server
-  hosts: db
+  hosts: localhost
   # become: true
   vars_files:
     - secrets.yml

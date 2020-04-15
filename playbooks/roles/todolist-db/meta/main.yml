@@ -30,7 +30,6 @@ galaxy_info:
     - database
     - ubuntu
 
-dependencies: 
-  - mysql-server
+dependencies: []
 
   
