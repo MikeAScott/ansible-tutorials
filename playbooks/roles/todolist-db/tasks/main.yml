@@ -11,6 +11,9 @@
 - name: Ensure {{ db_name }} db is present
   mysql_db:
     name: "{{ db_name }}"
+    login_host: "{{ db_host }}"
+    login_user: "{{ db_admin_user }}"
+    login_password: "{{ db_admin_password }}"
     state: present
   become: true
 
@@ -20,5 +23,8 @@
     host: "%"
     password: "{{ db_password }}"
     priv: "{{ db_name }}.*:ALL"
+    login_host: "{{ db_host }}"
+    login_user: "{{ db_admin_user }}"
+    login_password: "{{ db_admin_password }}"
     state: present
   become: true

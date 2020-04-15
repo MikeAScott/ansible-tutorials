@@ -1,6 +1,7 @@
 ---
 # defaults file for todo-webapp
 db_host: localhost
+db_name: tododb
 db_user: username
 db_password: password
 

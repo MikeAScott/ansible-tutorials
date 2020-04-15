@@ -1,5 +1,8 @@
 ---
 # defaults file for todolist-db
+db_host: localhost
 db_name: tododb
-db_user: todo
-db_password: todo
+db_user: username
+db_password: password
+db_admin_user: root
+db_admin_password: changeme
