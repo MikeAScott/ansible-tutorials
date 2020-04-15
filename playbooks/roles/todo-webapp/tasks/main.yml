@@ -17,10 +17,16 @@
     state: present
     msg: "Specified todo app did not deploy"
 
-
 - name: ensure application.properties is configured
   template: 
     src: templates/application.properties.j2
     dest: "{{ tomcat_home }}/webapps/todo/WEB-INF/classes/application.properties"
+  notify:
+    - restart tomcat
+
+- name: ensure homepage is deployed
+  template: 
+    src: templates/index.html.j2
+    dest: "{{ tomcat_home }}/webapps/ROOT/index.html"
   notify:
     - restart tomcat

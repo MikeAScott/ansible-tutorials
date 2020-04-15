@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Demo Web Server</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous" />
+  </head>
+
+<body style="padding-top:50px;">
+  <!-- Nav Bar -->
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+      <div class="navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/todo">Todo</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <!-- Body -->
+    <div class="container">
+      <h1>Welcome to the demo website</h1>
+
+      <hr />
+
+      <p>This is {{ inventory_hostname }}</p>
+      <ul>
+        <li>running on: {{ ansible_distribution }} {{ ansible_system }}</li>
+        <li>IP Address: {{ ansible_default_ipv4.address }}
+        <li>Configured on: {{ ansible_date_time.date }} at {{ ansible_date_time.time }} {{ ansible_date_time.tz }}</li>
+      </ul>
+
+      <hr />
+      <p>If you want to see the Todo List click <a href="/todo"> here </a>
+
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+      </script>
+
+  </body>
+
+</html>
