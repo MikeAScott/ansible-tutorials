@@ -5,12 +5,6 @@
     state: latest
     update_cache: yes
   become: true
-
-# - name: Ensure epel repo is installed
-#   yum:
-#     name: epel-release
-#     update_cache: yes
-#   become: true
   
 - name: Ensure mysqlclient dependencies are installed
   yum: 

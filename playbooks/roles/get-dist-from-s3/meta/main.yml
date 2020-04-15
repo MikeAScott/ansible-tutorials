@@ -1,6 +1,6 @@
 galaxy_info:
   author: Mike Scott
-  description: Deploy todo list web application 
+  description: Get application distributable from s3 bucket
   company: NTT Data
 
   license: license (BSD, MIT)
@@ -20,9 +20,8 @@ galaxy_info:
   #   - 99.99
 
   galaxy_tags:
-     - tomcat
+     - s3
      - webapp
-     - todo
+     - war
 
-dependencies: 
-  - tomcat-server
+dependencies: []

@@ -3,13 +3,13 @@
   hosts: all
   gather_facts: true
 
-- name: Configure DB Server
+- name: Configure DB
   hosts: localhost
-  # become: true
   vars_files:
     - secrets.yml
   roles:
     # - role: mysql-server
+    - role: get-dist-from-s3
     - role: todolist-db
 
 - name: Configure Web Server

@@ -5,10 +5,8 @@ db_name: tododb
 db_user: username
 db_password: password
 
-app_dist_bucket: 'com-nttdata-ta-demo'
 app_package: todo
 app_version: '0.0.1-SNAPSHOT'
 
+tomcat_package: tomcat
 tomcat_home: '/usr/share/tomcat'
-
-

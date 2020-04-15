@@ -24,6 +24,9 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - bionic
+    - name: Amazon
+      versions:
+      - 2
 
   galaxy_tags:
     - mysql

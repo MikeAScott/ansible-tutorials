@@ -1,0 +1,8 @@
+---
+# defaults
+app_dist_bucket: 'com-nttdata-ta-demo'
+app_package: todo
+app_version: '0.0.1-SNAPSHOT'
+
+
+

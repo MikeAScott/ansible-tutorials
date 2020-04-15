@@ -1,34 +1,6 @@
 ---
 # tasks file for todo-webapp
-# Get package onto control
-- name: Ensure pip is installed
-  local_action:
-    module: package
-    name: python-pip
-    state: latest
-
-- name: Ensure AWS python requirememnts are installed
-  local_action:
-    module: pip
-    name:
-      - boto
-      - boto3
-      - botocore
-    state: present
-
-- name: Ensure distribution directory is present
-  local_action:
-    module: file
-    name: dist
-    state: directory
-
-- name: Get package from s3
-  local_action:
-    module: aws_s3
-    bucket: "{{ app_dist_bucket }}"
-    object: "/dist/{{ app_package }}-{{ app_version }}.war"
-    dest: "dist/{{ app_package }}-{{ app_version }}.war"
-    mode: get
+# Get package from control /dist
 
 - name: Copy War to tomcat
   copy:

@@ -10,13 +10,17 @@ None
 
 Role Variables
 --------------
-
-None
+* db_host: localhost
+* db_name: tododb
+* db_user: username
+* db_password: password
+* db_admin_user: root
+* db_admin_password: changeme
 
 Dependencies
 ------------
 
-* mysql-db
+* MySQL server must be available 
 
 Example Playbook
 ----------------
@@ -36,4 +40,5 @@ Author Information
 ------------------
 
 Mike Scott
+
 NTT Data
