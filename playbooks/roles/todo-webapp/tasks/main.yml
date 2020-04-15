@@ -28,7 +28,7 @@
 - name: Copy War to tomcat
   copy:
     src: "dist/{{ app_package }}-{{ app_version }}.war"
-    dest:  /var/lib/tomcat9/webapps/todo.war
+    dest:  /usr/share/tomcat/webapps/todo.war
     remote_src: yes
   notify:
     - restart tomcat
