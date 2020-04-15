@@ -24,6 +24,11 @@
   notify:
     - restart tomcat
 
+- name: ensure tomcat has ROOT folder
+  file:
+    name: "{{ tomcat_home }}/webapps/ROOT"
+    state: directory
+
 - name: ensure homepage is deployed
   template: 
     src: templates/index.html.j2
