@@ -29,6 +29,7 @@
   copy:
     src: "dist/{{ app_package }}-{{ app_version }}.war"
     dest:  /var/lib/tomcat9/webapps/todo.war
+    remote_src: yes
   notify:
     - restart tomcat
 
