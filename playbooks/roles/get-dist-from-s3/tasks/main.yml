@@ -25,3 +25,4 @@
     object: "/dist/{{ app_package }}-{{ app_version }}.war"
     dest: "dist/{{ app_package }}-{{ app_version }}.war"
     mode: get
+    overwrite: different
