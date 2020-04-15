@@ -1,5 +1,18 @@
 ---
 # tasks file for todo-webapp
+- name: Ensure pip is installed
+  package:
+    name: pip
+    state: latest
+
+- name: Ensure AWS python requirememnts are installed
+  pip:
+    name:
+      - boto
+      - boto3
+      - botocore
+    state: present
+    
 - name: Ensure distribution directory is present
   file:
     name: dist
