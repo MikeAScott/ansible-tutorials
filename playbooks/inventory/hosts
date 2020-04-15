@@ -8,13 +8,13 @@ web2
 [stack:children]
 web
 
-[py3-hosts]
+[py3_hosts]
 
-[py3-hosts:vars]
+[py3_hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
 
 [stack:vars]
 ansible_connection=ssh
 ansible_port=22
 # ansible_ssh_private_key_file=~/.ssh/ansible_key
-ansible_user=ec2_user
+# ansible_user=ec2_user
