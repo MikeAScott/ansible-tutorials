@@ -1,15 +1,14 @@
+web1 ansible_host=52.210.230.231
+web2 ansible_host=34.244.13.220
+
 [web]
 web1
-
-[db]
-db1
+web2
 
 [stack:children]
 web
-db
 
 [py3-hosts]
-web1
 
 [py3-hosts:vars]
 ansible_python_interpreter=/usr/bin/python3
@@ -17,5 +16,5 @@ ansible_python_interpreter=/usr/bin/python3
 [stack:vars]
 ansible_connection=ssh
 ansible_port=22
-ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key
-ansible_user=vagrant
+# ansible_ssh_private_key_file=~/.ssh/ansible_key
+ansible_user=ec2_user

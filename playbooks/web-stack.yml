@@ -6,26 +6,24 @@
 - name: Configure DB Server
   hosts: db
   # become: true
+  vars_files:
+    - secrets.yml
   roles:
-    - role: mysql-server
+    # - role: mysql-server
     - role: todolist-db
-      vars:
-        db_user: todo
-        db_password: todo
 
 - name: Configure Web Server
   hosts: web
   become: true
+  vars_files:
+    - secrets.yml
 
   # vars:
-  #   db1_ip: "{{ hostvars['db1']['ansible_eth1']['ipv4']['address'] }}"
+  #   moved to group_vars file 
 
   roles:
     - role: tomcat-server
     - role: todo-webapp
-      vars:
-        db_host: '192.168.35.30'
-        db_user: todo
-        db_password: todo
+
 
         

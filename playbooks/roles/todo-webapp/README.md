@@ -15,7 +15,7 @@ Role Variables
 * db_password: password
 * app_package: todo
 * app_version: '0.0.1-SNAPSHOT'
-
+* tomcat_home: '/usr/share/tomcat/' 
 
 Dependencies
 ------------
