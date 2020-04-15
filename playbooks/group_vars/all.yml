@@ -1,0 +1,4 @@
+---
+db_host: 'localhost'
+app_dist_bucket: 'com-nttdata-ta-demo'
+app_version: '0.0.7-SNAPSHOT'
