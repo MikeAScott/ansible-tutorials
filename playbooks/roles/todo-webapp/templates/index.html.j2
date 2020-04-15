@@ -13,21 +13,26 @@
 
 <body style="padding-top:50px;">
   <!-- Nav Bar -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Demo Site</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Home</a>
-      </div>
-      <div class="navbar-collapse" id="navbar">
+      <div class="collapse navbar-collapse" id="demonavbar">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
           <li class="nav-item">
-            <a class="nav-link" href="/todo">Todo</a>
+            <a class="nav-link" href="/todo">Todo List</a>
           </li>
         </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
       </div>
-    </div>
-  </div>
+    </nav>
 
     <!-- Body -->
     <div class="container">
@@ -35,9 +40,9 @@
 
       <hr />
 
-      <p>This is {{ inventory_hostname }}</p>
+      <h2>This is {{ inventory_hostname }}</h2>
       <ul>
-        <li>running on: {{ ansible_distribution }} {{ ansible_system }}</li>
+        <li>Running on: {{ ansible_distribution }} {{ ansible_system }}</li>
         <li>IP Address: {{ ansible_default_ipv4.address }}
         <li>Configured on: {{ ansible_date_time.date }} at {{ ansible_date_time.time }} {{ ansible_date_time.tz }}</li>
       </ul>
