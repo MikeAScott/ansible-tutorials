@@ -30,7 +30,7 @@
     <h2>This is {{ inventory_hostname }}</h2>
     <ul>
       <li>Running on: {{ ansible_distribution }} {{ ansible_system }}</li>
-      <li>IP Address: {{ ansible_default_ipv4.address }}
+      <li>IP Address: {{ ansible_default_ipv4.address }}</li>
       <li>Configured on: {{ ansible_date_time.date }} at {{ ansible_date_time.time }} {{ ansible_date_time.tz }}</li>
     </ul>
 
